@@ -1,223 +1,115 @@
+# Calendario iOS — 10:00–17:00 con almuerzo + Micro‑proyecto del día
+_Inicio_: **Wednesday 29 Oct 2025**  ·  _Zona horaria_: America/Mexico_City
 
-# Proyectos iOS **sencillos y cero ambiguos** (MVVM + SwiftUI)
+## Bloques diarios
+- **Bloque 1**: 10:00–12:30 — Deep dive/lecturas + notas (2.5h)
+- **Almuerzo**: 12:30–13:30 — break (1h)
+- **Bloque 2**: 13:30–15:30 — Katas/POC (2h)
+- **Bloque 3**: 15:30–17:00 — Implementación/Tests (1.5h)
 
-> Objetivo: darte **micro‑proyectos** de 1–2 días (o una tarde) que ejerciten *una sola cosa a la vez*. Cada uno trae alcance exacto, tareas por pasos y criterios de aceptación.
+> Cada día trae un micro‑proyecto asignado con un único foco.
 
----
+> Criterios de aceptación de cada micro: ver **Proyectos_simplificados_iOS_Faus.md** (mismo numerado).
 
-## 1) **Cronómetro con laps** (Concurrencia + Actors)
-**Alcance**: 1 pantalla. Start/Stop/Reset y agregar laps. Persistencia **no** incluida.
-**Stack**: SwiftUI + `actor` para estado del tiempo + `Task` para ticks.
 
-**Tareas**
-1. `TimeKeeper` (**actor**) con propiedades `isRunning`, `elapsed` y método `tick()` (cada 0.1 s).
-2. `StopwatchViewModel` con acciones `start()`, `stop()`, `reset()`, `addLap()`.
-3. `StopwatchView` con botones y lista de laps.
-4. Prueba unitaria: lap añade el valor actual; reset vuelve a 0.
+## Semana 1 — Swift moderno + Concurrencia
 
-**Criterios de aceptación**
-- [ ] Tick estable: el tiempo aumenta en ~0.1 s cuando está corriendo.
-- [ ] `addLap` guarda el valor exacto del momento.
-- [ ] `reset` limpia tiempo y laps.
-- [ ] UI no se congela al iniciar/detener.
+### Día 1 — Wednesday 29 Oct 2025
+**Micro del día:** #1 Cronómetro con laps (Concurrencia + Actors) — *Parte 1: actor TimeKeeper + VM + UI base*
 
-**Stretch (opcional)**: formateo mm:ss:cs, accesibilidad (VoiceOver), animación suave.
+### Día 2 — Thursday 30 Oct 2025
+**Micro del día:** #1 Cronómetro con laps (Concurrencia + Actors) — *Parte 2: tests + refactor + accesibilidad básica*
 
----
+### Día 3 — Friday 31 Oct 2025
+**Micro del día:** #6 Cache Wrapper (Memoria + Disco) — *Parte 1: cache en memoria + TTL + tests*
 
-## 2) **HTTP Client Mini** (URLSession + Errores, sin servidor)
-**Alcance**: 1 vista que hace **GET** a un **fixture local** (no internet) con `URLProtocol` mock.
-**Stack**: SwiftUI + `URLSession` con `async/await` + `URLProtocol` custom.
+### Día 4 — Monday 03 Nov 2025
+**Micro del día:** #6 Cache Wrapper (Memoria + Disco) — *Parte 2: persistencia en disco + purgeExpired() + tests*
 
-**Tareas**
-1. Define `HTTPClient` con `get(url:)` (genérico decodificando a `Decodable`).
-2. Implementa `MockURLProtocol` que devuelve un JSON embebido.
-3. `MiniListViewModel`: `load()` llama al cliente y expone `[Item]` + estados (`isLoading`, `error`).
-4. Vista renderiza lista y estados vacíos/errores.
+### Día 5 — Tuesday 04 Nov 2025
+**Micro del día:** #1 Cronómetro con laps (Concurrencia + Actors) — *Stretch: formatos y animaciones + demo semanal*
 
-**Criterios de aceptación**
-- [ ] Caso 200: muestra 5 ítems de fixture.
-- [ ] Caso 500: muestra mensaje de error amigable.
-- [ ] Timeout simulado: muestra retry y este funciona.
-- [ ] Tests: 3 pruebas (200/500/timeout).
+## Semana 2 — Networking HTTP + Manejo de errores
 
-**Fixture sugerido** (`items.json`):
-```json
-[{"id":1,"title":"Alpha"},{"id":2,"title":"Beta"},{"id":3,"title":"Gamma"},{"id":4,"title":"Delta"},{"id":5,"title":"Epsilon"}]
-```
+### Día 1 — Wednesday 05 Nov 2025
+**Micro del día:** #2 HTTP Client Mini (URLSession + Errores) — *Parte 1: `HTTPClient.get` + mocks con URLProtocol*
 
----
+### Día 2 — Thursday 06 Nov 2025
+**Micro del día:** #2 HTTP Client Mini (URLSession + Errores) — *Parte 2: decodificación robusta + mappers + errores*
 
-## 3) **Lista→Detalle “Libros”** (SwiftUI Navegación)
-**Alcance**: 2 pantallas (Lista y Detalle) + deep link `myapp://book/{id}` (simulado con `openURL`).
+### Día 3 — Friday 07 Nov 2025
+**Micro del día:** #2 HTTP Client Mini (URLSession + Errores) — *Parte 3: retries exponenciales + cancelación + tests*
 
-**Tareas**
-1. Modelo `Book(id:Int,title:String,author:String,synopsis:String)`; dataset local (10 libros).
-2. `BooksViewModel` con búsqueda (filter in‑memory) y selección.
-3. `NavigationStack` con `NavigationPath` y ruta tipada a Detalle.
-4. Implementa `onOpenURL` para navegar al detalle por id.
+### Día 4 — Monday 10 Nov 2025
+**Micro del día:** #10 CI mínimo + Formato — *CI mínimo: `xcodebuild test` + swiftformat lint en PR*
 
-**Criterios de aceptación**
-- [ ] Búsqueda filtra por título/autor en vivo.
-- [ ] Deep link abre el libro correcto (simulado desde la app con un botón “Probar Deep Link”).
-- [ ] Estado se restaura al volver desde Detalle.
+### Día 5 — Tuesday 11 Nov 2025
+**Micro del día:** #2 HTTP Client Mini (URLSession + Errores) — *Integración mini + demo semanal*
 
-**Stretch**: `ShareLink` en Detalle, Dynamic Type, etiquetas de accesibilidad.
+## Semana 3 — SwiftUI avanzado + Navegación + Accesibilidad
 
----
+### Día 1 — Wednesday 12 Nov 2025
+**Micro del día:** #3 Lista→Detalle 'Libros' (SwiftUI Navegación) — *Parte 1: lista + filtro + VM @Observable*
 
-## 4) **Design System Mini** (3 componentes reusables)
-**Alcance**: 1 módulo `DesignSystem` con **3** componentes (Button, Card, Tag) + estilos y doc de uso.
+### Día 2 — Thursday 13 Nov 2025
+**Micro del día:** #3 Lista→Detalle 'Libros' (SwiftUI Navegación) — *Parte 2: NavigationStack/Path + restauración de estado*
 
-**Tareas**
-1. Define tokens (colores/tipografías/espaciados) en un `enum` o `struct`.
-2. `DSButton(style:.primary|.secondary)`, `DSCard`, `DSTag(status:.info|.warning)`.
-3. Playground/Screen “Catálogo” mostrando combinaciones.
-4. Documenta en README cómo usar cada componente.
+### Día 3 — Friday 14 Nov 2025
+**Micro del día:** #3 Lista→Detalle 'Libros' (SwiftUI Navegación) — *Parte 3: deep link `myapp://book/{id}` + pruebas*
 
-**Criterios de aceptación**
-- [ ] Los 3 componentes se usan en otra vista de la app (no solo catálogo).
-- [ ] Soporta modo claro/oscuro sin perder contraste AA.
-- [ ] README con ejemplos de código y capturas.
+### Día 4 — Monday 17 Nov 2025
+**Micro del día:** #4 Design System Mini (3 componentes) — *Parte 1: DSButton/DSCard/DSTag + tokens*
 
----
+### Día 5 — Tuesday 18 Nov 2025
+**Micro del día:** #4 Design System Mini (3 componentes) — *Parte 2: catálogo + consumo en otra vista + demo semanal*
 
-## 5) **Notes Lite** (SwiftData CRUD básico)
-**Alcance**: 1 entidad `Note(title, body, createdAt)` con lista + crear/editar/borrar. Sin sync ni cifrado.
+## Semana 4 — Arquitectura (MVVM + Clean) + SPM + Design System
 
-**Tareas**
-1. Modelo `@Model` y `@Query` en la lista.
-2. Form de creación/edición con validación mínima (título no vacío).
-3. Sort por `createdAt desc` y búsqueda local.
-4. Test simple de inserción/edición (si usas store en memoria).
+### Día 1 — Wednesday 19 Nov 2025
+**Micro del día:** #4 Design System Mini (3 componentes) — *Parte 3: mover DS a módulo SPM + docs*
 
-**Criterios de aceptación**
-- [ ] Crear/editar/eliminar funcionan y la lista reacciona en vivo.
-- [ ] Búsqueda por título funciona.
-- [ ] Migración ligera: agrega campo `isPinned: Bool` con default `false` (opcional).
+### Día 2 — Thursday 20 Nov 2025
+**Micro del día:** #10 CI mínimo + Formato — *Ampliar CI: cobertura mínima y badge en README*
 
----
+### Día 3 — Friday 21 Nov 2025
+**Micro del día:** #2 HTTP Client Mini (URLSession + Errores) — *Refactor cliente HTTP a módulo SPM + ejemplos*
 
-## 6) **Cache Wrapper** (Infra: memoria + disco)
-**Alcance**: 1 wrapper `Cache<Key: Hashable, Value: Codable>` con TTL opcional + demo sencilla.
+### Día 4 — Monday 24 Nov 2025
+**Micro del día:** #3 Lista→Detalle 'Libros' (SwiftUI Navegación) — *Refactor navegación en módulo de Feature + tests snapshot*
 
-**Tareas**
-1. Implementa capa en memoria (dictionary + fecha de expiración).
-2. Persistencia en disco (archivo JSON por key o un único índice).
-3. API: `set(_:for:ttl:)`, `get(_:)`, `invalidate(_:)`, `purgeExpired()`.
-4. Vista simple con campos para `key`/`value` y botones `Set/Get/Invalidate`.
+### Día 5 — Tuesday 25 Nov 2025
+**Micro del día:** #4 Design System Mini (3 componentes) — *Pulido de DS + checklist de calidad + demo semanal*
 
-**Criterios de aceptación**
-- [ ] TTL expira valores automáticamente en `get` y manualmente con `purgeExpired`.
-- [ ] Tests para `set`/`get`/`expire`/`invalidate`.
+## Semana 5 — Persistencia (SwiftData) + Offline‑First + Keychain
 
----
+### Día 1 — Wednesday 26 Nov 2025
+**Micro del día:** #5 Notes Lite (SwiftData CRUD) — *Parte 1: modelo SwiftData + lista + CRUD*
 
-## 7) **Chat Simulado** (WS mock sin servidor)
-**Alcance**: 1 pantalla chat local con “online/offline”. Cuando está offline, mensajes se **encolan**; al volver online, se **envían**.
+### Día 2 — Thursday 27 Nov 2025
+**Micro del día:** #5 Notes Lite (SwiftData CRUD) — *Parte 2: búsqueda, orden y validación*
 
-**Tareas**
-1. `ChatService` con `PassthroughSubject` (o `AsyncStream`) simulando socket.
-2. VM con estado `isOnline`, `queue:[Message]` y `send(_:)`.
-3. UI con lista y input; toggle online/offline.
-4. Métrica simple: tiempo desde encolado hasta entrega.
+### Día 3 — Friday 28 Nov 2025
+**Micro del día:** #5 Notes Lite (SwiftData CRUD) — *Parte 3: migración ligera `isPinned` + tests*
 
-**Criterios de aceptación**
-- [ ] En offline, mensajes quedan en cola y no aparecen como enviados.
-- [ ] Al volver online, la cola se vacía en orden y aparecen como enviados.
-- [ ] Indicador visual de estado (Tag DS).
+### Día 4 — Monday 01 Dec 2025
+**Micro del día:** #6 Cache Wrapper (Memoria + Disco) — *Integración Cache Wrapper con Notes Lite*
 
----
+### Día 5 — Tuesday 02 Dec 2025
+**Micro del día:** #5 Notes Lite (SwiftData CRUD) — *Pulido persistencia + demo semanal*
 
-## 8) **Notificaciones Locales + Deep Link**
-**Alcance**: 1 demo que programa 3 categorías de notificación local. Al tocar, abre detalle `myapp://book/{id}`.
+## Semana 6 — WebSockets + Notificaciones + Testing + Performance + CI/CD
 
-**Tareas**
-1. Solicita permiso y define categorías/acciones.
-2. Programa 3 notificaciones (5s, 10s, 15s) con payload que incluya `bookId`.
-3. Maneja `userNotificationCenter(_:didReceive:)`/`onOpenURL` y navega al detalle.
-4. Pantalla de “Historial” de notificaciones recibidas (en memoria).
+### Día 1 — Wednesday 03 Dec 2025
+**Micro del día:** #7 Chat Simulado (WS mock) — *Parte 1: chat simulado online/offline + cola local*
 
-**Criterios de aceptación**
-- [ ] Acciones personalizadas aparecen.
-- [ ] Tocar la noti abre el libro correcto.
-- [ ] Historial muestra hora y `bookId` recibido.
+### Día 2 — Thursday 04 Dec 2025
+**Micro del día:** #7 Chat Simulado (WS mock) — *Parte 2: reintentos y métricas simples*
 
----
+### Día 3 — Friday 05 Dec 2025
+**Micro del día:** #8 Notificaciones Locales + Deep Link — *Notificaciones locales + deep link a detalle*
 
-## 9) **StoreKit 2 (Test local)** — *opcional y mínimo*
-**Alcance**: 1 botón “Desbloquear Premium” usando **StoreKit Configuration** (sin backend).
+### Día 4 — Monday 08 Dec 2025
+**Micro del día:** #9 StoreKit 2 (Config local) — *StoreKit config local: unlock premium + gating*
 
-**Tareas**
-1. Crea un StoreKit Configuration con 1 producto no‑consumible `premium.unlock`.
-2. VM con `isPremium` que se actualiza tras transacción.
-3. Gating: vista premium vs. upsell.
-4. Tests unitarios de lógica (envolviendo StoreKit en protocolo).
-
-**Criterios de aceptación**
-- [ ] Purchase simulado completa y cambia `isPremium`.
-- [ ] Estado persiste en `UserDefaults` (simple).
-
----
-
-## 10) **CI mínimo + Formato** (Infra)
-**Alcance**: workflow de GitHub Actions que corre `xcodebuild test` y `swiftformat --lint`.
-
-**Tareas**
-1. Agrega `.github/workflows/ci.yml` con job en macOS-latest.
-2. Instala `swiftformat`/`swiftlint` (si usas).
-3. Falla el job si hay tests rotos o lint con errores.
-4. Badge en README con estado del CI.
-
-**Criterios de aceptación**
-- [ ] PR bloqueado si falla CI.
-- [ ] Badge visible con estado.
-
----
-
-## Estructura base (para todos)
-```
-App/
-  Application/
-    AppMain.swift
-    DIContainer.swift        // si aplica
-  Features/
-    <FeatureName>/
-      UI/
-      Presentation/          // ViewModel
-      Domain/                // entidades/use cases (si aplica)
-      Data/                  // mocks/protocols
-  Core/
-    DesignSystem/
-    Networking/              // si aplica
-    Persistence/             // si aplica
-  Resources/
-  Tests/
-```
-
----
-
-## Sugerencias de combinación (un fin de semana = 2–3 micros)
-- **Combo 1:** (1) Cronómetro + (4) Design System + (10) CI → infra + UI base.
-- **Combo 2:** (2) HTTP Mini + (3) Lista→Detalle + (8) Notis locales → features visibles sin backend real.
-- **Combo 3:** (5) Notes Lite + (6) Cache Wrapper + (7) Chat simulado → persistencia + resiliencia.
-
----
-
-## Qué subir a GitHub por micro‑proyecto
-- README con: problema, decisión de diseño, métricas (si aplica), capturas y **TODOs**.
-- 1–3 pruebas unitarias representativas.
-- Etiqueta de release `v0.1` (tag) + changelog de 3 bullets.
-
----
-
-## Rúbrica rápida para auto‑evaluarte (0–2 puntos c/u)
-1. **Claridad del alcance** (0 ambiguo – 2 súper claro).
-2. **Calidad del código** (0 spaghetti – 2 limpio, testable).
-3. **Arquitectura** (0 acoplamiento – 2 límites claros).
-4. **UX/Accesibilidad** (0 descuidada – 2 usable y accesible).
-5. **Pruebas** (0 sin tests – 2 casos clave cubiertos).
-6. **Documentación** (0 mínima – 2 README útil con decisiones).
-7. **Métricas/Perf** (0 ninguna – 2 medición básica y mejora).
-
-> 12+ puntos = listo para portafolio; 9–11 = casi; <9 = reintenta con un micro extra.
+### Día 5 — Tuesday 09 Dec 2025
+**Micro del día:** #10 CI mínimo + Formato — *CI/CD final + TestFlight (si aplica) + retro y case study*
